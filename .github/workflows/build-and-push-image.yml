@@ -9,8 +9,36 @@ on:
         description: 'Image tag'
         required: true
         default: 'test'
-permissions:
-  contents: read
+jobs:
+  binary:
+    name: Build Golang project
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Set up Go 1.x
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.15
+      -
+        run: go version
+      -
+        name: Check out code into the Go module directory
+        uses: actions/checkout@v2
+      -
+        name: Build
+        run: make build
+      -
+        name: Archive artifacts for frpc
+        uses: actions/upload-artifact@v1
+        with:
+          name: frpc
+          path: bin/frpc
+      -
+        name: Archive artifacts for frps
+        uses: actions/upload-artifact@v1
+        with:
+          name: frps
+          path: bin/frps
 
 jobs:
   image:
