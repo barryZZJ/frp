@@ -1,0 +1,8 @@
+编译当前平台：
+make
+
+编译所有平台：
+make -f Makefile.cross-compiles
+
+修改版本号：
+pkg/util/version/version.go

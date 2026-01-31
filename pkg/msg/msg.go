@@ -67,120 +67,120 @@ type ClientSpec struct {
 	// Due to the support of VirtualClient, frps needs to know the client type in order to
 	// differentiate the processing logic.
 	// Optional values: ssh-tunnel
-	Type string `json:"type,omitempty"`
+	Type string `json:"tp,omitempty"`
 	// If the value is true, the client will not require authentication.
-	AlwaysAuthPass bool `json:"always_auth_pass,omitempty"`
+	AlwaysAuthPass bool `json:"a_a_p,omitempty"`
 }
 
 // When frpc start, client send this message to login to server.
 type Login struct {
-	Version      string            `json:"version,omitempty"`
-	Hostname     string            `json:"hostname,omitempty"`
-	Os           string            `json:"os,omitempty"`
-	Arch         string            `json:"arch,omitempty"`
-	User         string            `json:"user,omitempty"`
-	PrivilegeKey string            `json:"privilege_key,omitempty"`
-	Timestamp    int64             `json:"timestamp,omitempty"`
-	RunID        string            `json:"run_id,omitempty"`
-	ClientID     string            `json:"client_id,omitempty"`
-	Metas        map[string]string `json:"metas,omitempty"`
+	Version      string            `json:"a,omitempty"`
+	Hostname     string            `json:"b,omitempty"`
+	Os           string            `json:"c,omitempty"`
+	Arch         string            `json:"d,omitempty"`
+	User         string            `json:"e,omitempty"`
+	PrivilegeKey string            `json:"f,omitempty"`
+	Timestamp    int64             `json:"t,omitempty"`
+	RunID        string            `json:"r,omitempty"`
+	ClientID     string            `json:"c_i,omitempty"`
+	Metas        map[string]string `json:"m,omitempty"`
 
 	// Currently only effective for VirtualClient.
-	ClientSpec ClientSpec `json:"client_spec,omitempty"`
+	ClientSpec ClientSpec `json:"cs,omitempty"`
 
 	// Some global configures.
-	PoolCount int `json:"pool_count,omitempty"`
+	PoolCount int `json:"pc,omitempty"`
 }
 
 type LoginResp struct {
-	Version string `json:"version,omitempty"`
-	RunID   string `json:"run_id,omitempty"`
-	Error   string `json:"error,omitempty"`
+	Version string `json:"a,omitempty"`
+	RunID   string `json:"r,omitempty"`
+	Error   string `json:"g,omitempty"`
 }
 
 // When frpc login success, send this message to frps for running a new proxy.
 type NewProxy struct {
-	ProxyName          string            `json:"proxy_name,omitempty"`
-	ProxyType          string            `json:"proxy_type,omitempty"`
-	UseEncryption      bool              `json:"use_encryption,omitempty"`
-	UseCompression     bool              `json:"use_compression,omitempty"`
-	BandwidthLimit     string            `json:"bandwidth_limit,omitempty"`
-	BandwidthLimitMode string            `json:"bandwidth_limit_mode,omitempty"`
-	Group              string            `json:"group,omitempty"`
-	GroupKey           string            `json:"group_key,omitempty"`
-	Metas              map[string]string `json:"metas,omitempty"`
-	Annotations        map[string]string `json:"annotations,omitempty"`
+	ProxyName          string            `json:"pn,omitempty"`
+	ProxyType          string            `json:"pt,omitempty"`
+	UseEncryption      bool              `json:"ue,omitempty"`
+	UseCompression     bool              `json:"uc,omitempty"`
+	BandwidthLimit     string            `json:"bl,omitempty"`
+	BandwidthLimitMode string            `json:"blm,omitempty"`
+	Group              string            `json:"gg,omitempty"`
+	GroupKey           string            `json:"gk,omitempty"`
+	Metas              map[string]string `json:"m,omitempty"`
+	Annotations        map[string]string `json:"an,omitempty"`
 
 	// tcp and udp only
 	RemotePort int `json:"remote_port,omitempty"`
 
 	// http and https only
-	CustomDomains     []string          `json:"custom_domains,omitempty"`
-	SubDomain         string            `json:"subdomain,omitempty"`
-	Locations         []string          `json:"locations,omitempty"`
-	HTTPUser          string            `json:"http_user,omitempty"`
-	HTTPPwd           string            `json:"http_pwd,omitempty"`
-	HostHeaderRewrite string            `json:"host_header_rewrite,omitempty"`
-	Headers           map[string]string `json:"headers,omitempty"`
-	ResponseHeaders   map[string]string `json:"response_headers,omitempty"`
-	RouteByHTTPUser   string            `json:"route_by_http_user,omitempty"`
+	CustomDomains     []string          `json:"cd,omitempty"`
+	SubDomain         string            `json:"subd,omitempty"`
+	Locations         []string          `json:"loc,omitempty"`
+	HTTPUser          string            `json:"h_u,omitempty"`
+	HTTPPwd           string            `json:"h_p,omitempty"`
+	HostHeaderRewrite string            `json:"h_h_r,omitempty"`
+	Headers           map[string]string `json:"hdrs,omitempty"`
+	ResponseHeaders   map[string]string `json:"r_h,omitempty"`
+	RouteByHTTPUser   string            `json:"r_b_h_u,omitempty"`
 
 	// stcp, sudp, xtcp
 	Sk         string   `json:"sk,omitempty"`
-	AllowUsers []string `json:"allow_users,omitempty"`
+	AllowUsers []string `json:"a_us,omitempty"`
 
 	// tcpmux
-	Multiplexer string `json:"multiplexer,omitempty"`
+	Multiplexer string `json:"mpl,omitempty"`
 }
 
 type NewProxyResp struct {
-	ProxyName  string `json:"proxy_name,omitempty"`
-	RemoteAddr string `json:"remote_addr,omitempty"`
-	Error      string `json:"error,omitempty"`
+	ProxyName  string `json:"pn,omitempty"`
+	RemoteAddr string `json:"r_a,omitempty"`
+	Error      string `json:"g,omitempty"`
 }
 
 type CloseProxy struct {
-	ProxyName string `json:"proxy_name,omitempty"`
+	ProxyName string `json:"pn,omitempty"`
 }
 
 type NewWorkConn struct {
-	RunID        string `json:"run_id,omitempty"`
-	PrivilegeKey string `json:"privilege_key,omitempty"`
-	Timestamp    int64  `json:"timestamp,omitempty"`
+	RunID        string `json:"r,omitempty"`
+	PrivilegeKey string `json:"f,omitempty"`
+	Timestamp    int64  `json:"t,omitempty"`
 }
 
 type ReqWorkConn struct{}
 
 type StartWorkConn struct {
-	ProxyName string `json:"proxy_name,omitempty"`
-	SrcAddr   string `json:"src_addr,omitempty"`
-	DstAddr   string `json:"dst_addr,omitempty"`
-	SrcPort   uint16 `json:"src_port,omitempty"`
-	DstPort   uint16 `json:"dst_port,omitempty"`
-	Error     string `json:"error,omitempty"`
+	ProxyName string `json:"pn,omitempty"`
+	SrcAddr   string `json:"s_a,omitempty"`
+	DstAddr   string `json:"d_a,omitempty"`
+	SrcPort   uint16 `json:"s_p,omitempty"`
+	DstPort   uint16 `json:"d_p,omitempty"`
+	Error     string `json:"g,omitempty"`
 }
 
 type NewVisitorConn struct {
-	RunID          string `json:"run_id,omitempty"`
-	ProxyName      string `json:"proxy_name,omitempty"`
-	SignKey        string `json:"sign_key,omitempty"`
-	Timestamp      int64  `json:"timestamp,omitempty"`
-	UseEncryption  bool   `json:"use_encryption,omitempty"`
-	UseCompression bool   `json:"use_compression,omitempty"`
+	RunID          string `json:"r,omitempty"`
+	ProxyName      string `json:"pn,omitempty"`
+	SignKey        string `json:"s_k,omitempty"`
+	Timestamp      int64  `json:"t,omitempty"`
+	UseEncryption  bool   `json:"ue,omitempty"`
+	UseCompression bool   `json:"uc,omitempty"`
 }
 
 type NewVisitorConnResp struct {
-	ProxyName string `json:"proxy_name,omitempty"`
-	Error     string `json:"error,omitempty"`
+	ProxyName string `json:"pn,omitempty"`
+	Error     string `json:"g,omitempty"`
 }
 
 type Ping struct {
-	PrivilegeKey string `json:"privilege_key,omitempty"`
-	Timestamp    int64  `json:"timestamp,omitempty"`
+	PrivilegeKey string `json:"f,omitempty"`
+	Timestamp    int64  `json:"t,omitempty"`
 }
 
 type Pong struct {
-	Error string `json:"error,omitempty"`
+	Error string `json:"g,omitempty"`
 }
 
 type UDPPacket struct {
@@ -190,22 +190,22 @@ type UDPPacket struct {
 }
 
 type NatHoleVisitor struct {
-	TransactionID string   `json:"transaction_id,omitempty"`
-	ProxyName     string   `json:"proxy_name,omitempty"`
-	PreCheck      bool     `json:"pre_check,omitempty"`
-	Protocol      string   `json:"protocol,omitempty"`
-	SignKey       string   `json:"sign_key,omitempty"`
-	Timestamp     int64    `json:"timestamp,omitempty"`
-	MappedAddrs   []string `json:"mapped_addrs,omitempty"`
-	AssistedAddrs []string `json:"assisted_addrs,omitempty"`
+	TransactionID string   `json:"tr_i,omitempty"`
+	ProxyName     string   `json:"pn,omitempty"`
+	PreCheck      bool     `json:"p_c,omitempty"`
+	Protocol      string   `json:"pr,omitempty"`
+	SignKey       string   `json:"s_k,omitempty"`
+	Timestamp     int64    `json:"t,omitempty"`
+	MappedAddrs   []string `json:"m_a,omitempty"`
+	AssistedAddrs []string `json:"a_a,omitempty"`
 }
 
 type NatHoleClient struct {
-	TransactionID string   `json:"transaction_id,omitempty"`
-	ProxyName     string   `json:"proxy_name,omitempty"`
+	TransactionID string   `json:"tr_i,omitempty"`
+	ProxyName     string   `json:"pn,omitempty"`
 	Sid           string   `json:"sid,omitempty"`
-	MappedAddrs   []string `json:"mapped_addrs,omitempty"`
-	AssistedAddrs []string `json:"assisted_addrs,omitempty"`
+	MappedAddrs   []string `json:"m_a,omitempty"`
+	AssistedAddrs []string `json:"a_a,omitempty"`
 }
 
 type PortsRange struct {
@@ -214,34 +214,34 @@ type PortsRange struct {
 }
 
 type NatHoleDetectBehavior struct {
-	Role              string       `json:"role,omitempty"` // sender or receiver
-	Mode              int          `json:"mode,omitempty"` // 0, 1, 2...
+	Role              string       `json:"rl,omitempty"` // sender or receiver
+	Mode              int          `json:"md,omitempty"` // 0, 1, 2...
 	TTL               int          `json:"ttl,omitempty"`
-	SendDelayMs       int          `json:"send_delay_ms,omitempty"`
-	ReadTimeoutMs     int          `json:"read_timeout,omitempty"`
-	CandidatePorts    []PortsRange `json:"candidate_ports,omitempty"`
-	SendRandomPorts   int          `json:"send_random_ports,omitempty"`
-	ListenRandomPorts int          `json:"listen_random_ports,omitempty"`
+	SendDelayMs       int          `json:"s_d_m,omitempty"`
+	ReadTimeoutMs     int          `json:"r_t,omitempty"`
+	CandidatePorts    []PortsRange `json:"c_p,omitempty"`
+	SendRandomPorts   int          `json:"s_r_p,omitempty"`
+	ListenRandomPorts int          `json:"l_r_p,omitempty"`
 }
 
 type NatHoleResp struct {
-	TransactionID  string                `json:"transaction_id,omitempty"`
+	TransactionID  string                `json:"tr_i,omitempty"`
 	Sid            string                `json:"sid,omitempty"`
-	Protocol       string                `json:"protocol,omitempty"`
-	CandidateAddrs []string              `json:"candidate_addrs,omitempty"`
-	AssistedAddrs  []string              `json:"assisted_addrs,omitempty"`
-	DetectBehavior NatHoleDetectBehavior `json:"detect_behavior,omitempty"`
-	Error          string                `json:"error,omitempty"`
+	Protocol       string                `json:"pr,omitempty"`
+	CandidateAddrs []string              `json:"c_a,omitempty"`
+	AssistedAddrs  []string              `json:"a_a,omitempty"`
+	DetectBehavior NatHoleDetectBehavior `json:"d_b,omitempty"`
+	Error          string                `json:"g,omitempty"`
 }
 
 type NatHoleSid struct {
-	TransactionID string `json:"transaction_id,omitempty"`
+	TransactionID string `json:"tr_i,omitempty"`
 	Sid           string `json:"sid,omitempty"`
-	Response      bool   `json:"response,omitempty"`
-	Nonce         string `json:"nonce,omitempty"`
+	Response      bool   `json:"rsp,omitempty"`
+	Nonce         string `json:"nnc,omitempty"`
 }
 
 type NatHoleReport struct {
 	Sid     string `json:"sid,omitempty"`
-	Success bool   `json:"success,omitempty"`
+	Success bool   `json:"suc,omitempty"`
 }
